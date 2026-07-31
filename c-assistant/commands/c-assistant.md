@@ -51,8 +51,13 @@ python3 "${CLAUDE_PLUGIN_ROOT}/scripts/session-scan.py" --full <session-id-prefi
 ### 3. Count what is actually running
 
 ```bash
-ps -eo pid,etime,command | grep "[c]laude" | grep -v bg-pty-host
+ps -eo pid,etime,command | grep "[c]laude" | grep -v "bg-pty-host\|bg-spare\|daemon run"
 ```
+
+**Match on `claude` itself, not on whatever flag they usually launch with.** Resumed
+sessions (`--resume`), headless runs (`claude -p`), and the desktop app all run
+without the flags an interactive shell alias adds. Grepping for a flag undercounts,
+and this step then writes those sessions off as closed windows.
 
 That is the live-process count. Compare it to the number of transcripts touched
 in the last ~30 minutes; they should roughly agree. A transcript touched 3 hours
