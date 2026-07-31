@@ -1,0 +1,6 @@
+# Renders the "Sponsor" button on the repo.
+#
+# Ko-fi takes 0% on one-off tips; you still pay the payment processor (~2.9% + $0.30).
+ko_fi: voidharbor
+# GitHub Sponsors needs Stripe Connect + tax info + GitHub review. Add once approved.
+# github: [voidharbor]
