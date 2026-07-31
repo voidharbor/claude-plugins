@@ -1,0 +1,57 @@
+{
+  "name": "voidharbor",
+  "owner": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  },
+  "metadata": {
+    "description": "Small, sharp Claude Code commands: answer briefly, audit what you have built, clean up after yourself, drive native macOS apps, and run multi-agent workflows without burning the budget."
+  },
+  "plugins": [
+    {
+      "name": "efmtu",
+      "description": "Answer short and simple. Three sentences or five bullets, answer first, plain words - without letting brevity turn a hedge into a false promise.",
+      "version": "1.0.0",
+      "source": "./efmtu",
+      "category": "productivity",
+      "author": { "name": "voidharbor", "url": "https://github.com/voidharbor" },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "my-skills",
+      "description": "Inventory every command, skill, agent, hook and routine you have authored, sorted generic to personal to private, so you know what is safe to publish before you publish it.",
+      "version": "1.0.0",
+      "source": "./my-skills",
+      "category": "productivity",
+      "author": { "name": "voidharbor", "url": "https://github.com/voidharbor" },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "chrome-tabs",
+      "description": "Close the Chrome tabs this session opened, and only those - so agents stop leaving orphaned tab groups behind. Requires the Claude in Chrome extension.",
+      "version": "1.0.0",
+      "source": "./chrome-tabs",
+      "category": "productivity",
+      "author": { "name": "voidharbor", "url": "https://github.com/voidharbor" },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "mac-control",
+      "description": "Drive native macOS apps via the computer-use MCP - Word/Pages PDF export, Finder, Preview, Messages, System Settings. Includes the per-app permission tiers that decide what will actually work.",
+      "version": "1.0.0",
+      "source": "./mac-control",
+      "category": "productivity",
+      "author": { "name": "voidharbor", "url": "https://github.com/voidharbor" },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "ultracode-lite",
+      "description": "Run multi-agent Workflow orchestration on a lean budget: scout inline, fan out narrow, set model and effort on every agent, pipeline instead of parallel, verify only what is expensive to get wrong.",
+      "version": "1.0.0",
+      "source": "./ultracode-lite",
+      "category": "productivity",
+      "author": { "name": "voidharbor", "url": "https://github.com/voidharbor" },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    }
+  ]
+}

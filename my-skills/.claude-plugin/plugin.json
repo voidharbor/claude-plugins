@@ -1,0 +1,6 @@
+{
+  "name": "my-skills",
+  "description": "Inventory every command, skill, agent, hook and routine you have authored, sorted generic to personal to private, so you know what is safe to publish before you publish it.",
+  "version": "1.0.0",
+  "author": {"name":"voidharbor","url":"https://github.com/voidharbor"}
+}

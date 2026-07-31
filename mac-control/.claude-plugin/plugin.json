@@ -1,0 +1,6 @@
+{
+  "name": "mac-control",
+  "description": "Drive native macOS apps via the computer-use MCP - Word/Pages PDF export, Finder, Preview, Messages, System Settings. Includes the per-app permission tiers that decide what will actually work.",
+  "version": "1.0.0",
+  "author": {"name":"voidharbor","url":"https://github.com/voidharbor"}
+}
