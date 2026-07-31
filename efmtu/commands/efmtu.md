@@ -2,6 +2,8 @@
 description: Use when the user wants a short, plain answer instead of a thorough one — they asked a quick question, said an explanation was too long or too technical, or invoked this directly. Applies to the answer only, never to the work behind it.
 ---
 
+**E**asy **F**or **M**e **T**o **U**nderstand.
+
 Answer short and simple.
 
 - **With an argument** → answer that question, short.

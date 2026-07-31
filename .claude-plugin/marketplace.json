@@ -10,11 +10,14 @@
   "plugins": [
     {
       "name": "efmtu",
-      "description": "Answer short and simple. Three sentences or five bullets, answer first, plain words - without letting brevity turn a hedge into a false promise.",
+      "description": "\"Easy For Me To Understand\" - answer short and simple. Three sentences or five bullets, answer first, plain words - without letting brevity turn a hedge into a false promise.",
       "version": "1.0.0",
       "source": "./efmtu",
       "category": "productivity",
-      "author": { "name": "voidharbor", "url": "https://github.com/voidharbor" },
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
       "homepage": "https://github.com/voidharbor/claude-plugins"
     },
     {
@@ -23,7 +26,10 @@
       "version": "1.0.0",
       "source": "./my-skills",
       "category": "productivity",
-      "author": { "name": "voidharbor", "url": "https://github.com/voidharbor" },
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
       "homepage": "https://github.com/voidharbor/claude-plugins"
     },
     {
@@ -32,7 +38,10 @@
       "version": "1.0.0",
       "source": "./chrome-tabs",
       "category": "productivity",
-      "author": { "name": "voidharbor", "url": "https://github.com/voidharbor" },
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
       "homepage": "https://github.com/voidharbor/claude-plugins"
     },
     {
@@ -41,7 +50,10 @@
       "version": "1.0.0",
       "source": "./mac-control",
       "category": "productivity",
-      "author": { "name": "voidharbor", "url": "https://github.com/voidharbor" },
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
       "homepage": "https://github.com/voidharbor/claude-plugins"
     },
     {
@@ -50,7 +62,10 @@
       "version": "1.0.0",
       "source": "./ultracode-lite",
       "category": "productivity",
-      "author": { "name": "voidharbor", "url": "https://github.com/voidharbor" },
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
       "homepage": "https://github.com/voidharbor/claude-plugins"
     }
   ]
