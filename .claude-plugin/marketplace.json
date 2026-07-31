@@ -57,10 +57,10 @@
       "homepage": "https://github.com/voidharbor/claude-plugins"
     },
     {
-      "name": "ultracode-$$;)",
+      "name": "ultracode-lite",
       "description": "Run multi-agent Workflow orchestration on a lean budget: scout inline, fan out narrow, set model and effort on every agent, pipeline instead of parallel, verify only what is expensive to get wrong.",
       "version": "1.0.0",
-      "source": "./ultracode-$$;)",
+      "source": "./ultracode-lite",
       "category": "productivity",
       "author": {
         "name": "voidharbor",

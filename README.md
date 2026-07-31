@@ -21,7 +21,7 @@ Install only what you want; each plugin is independent.
 | **my-skills** | Inventories everything *you* have authored (commands, skills, agents, hooks, routines) and sorts it generic → personal → private, so you know what is safe to publish. | nothing |
 | **chrome-tabs** | Closes the Chrome tabs the current session opened, and only those. Stops agents leaving orphaned "✅ Claude" tab groups behind. | [Claude in Chrome](https://claude.com/chrome) extension |
 | **mac-control** | Drives native macOS apps via the computer-use MCP — Word/Pages PDF export, Finder, Preview, Messages, System Settings. | computer-use MCP, macOS |
-| **ultracode-$$;)** | Runs multi-agent `Workflow` orchestration on a lean budget: scout inline, fan out narrow, set model and effort on every agent, pipeline instead of parallel. | `Workflow` tool |
+| **ultracode-lite** | Runs multi-agent `Workflow` orchestration on a lean budget: scout inline, fan out narrow, set model and effort on every agent, pipeline instead of parallel. | `Workflow` tool |
 | **c-assistant** | Triages every session you have open and reports which are blocked on you — the question each one asked, what only you can do, and where two sessions are duplicating work. | Python 3 |
 
 ## Notes on three of them
@@ -46,7 +46,7 @@ the checks — it just reports briefly. It explicitly refuses to let brevity tur
 don't know" into a confident guess, which is the usual failure mode of terseness
 instructions.
 
-## A note on `ultracode-$$;)`
+## A note on `ultracode-lite`
 
 That really is the plugin name. Because of the shell metacharacters, quote it:
 
