@@ -25,7 +25,7 @@ Install only what you want; each plugin is independent.
 | **c-assistant** | Triages every session you have open and reports which are blocked on you — the question each one asked, what only you can do, and where two sessions are duplicating work. | Python 3 |
 | **refresh** | Shows the last prompt you actually typed, word for word, read from the transcript on disk — so it survives context being summarized. | Python 3 |
 
-## Notes on four of them
+## Notes on five of them
 
 **`c-assistant`** is for people who keep five or ten sessions going and lose track
 of which ones are waiting on an answer. It reads only the tail of each transcript,
@@ -57,13 +57,15 @@ the checks — it just reports briefly. It explicitly refuses to let brevity tur
 don't know" into a confident guess, which is the usual failure mode of terseness
 instructions.
 
-## A note on `ultracode-lite`
-
-That really is the plugin name. Because of the shell metacharacters, quote it:
-
-```
-/plugin install 'ultracode-$$;)@voidharbor'
-```
+**`ultracode-lite`** is for the case where a `Workflow` is genuinely the right tool
+but the default one costs more than the answer is worth. Two settings do most of the
+damage and are easy to miss: spawned agents inherit your session's reasoning effort
+unless you set `effort` per agent, and they inherit your session's model unless you set
+`model`, so a throwaway grep-and-report stage quietly runs at the top tier. The command
+makes both explicit on every call, caps the fan-out at your machine's real concurrency
+limit rather than an arbitrary number, prefers `pipeline()` over barriers, and verifies
+only claims that are expensive to get wrong. It also insists on saying what got capped
+or dropped, so a bounded sweep never reads as exhaustive coverage.
 
 ## Requirements
 

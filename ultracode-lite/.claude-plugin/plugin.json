@@ -1,7 +1,7 @@
 {
   "name": "ultracode-lite",
-  "description": "Run multi-agent Workflow orchestration on a lean budget: scout inline, fan out narrow, set model and effort on every agent, pipeline instead of parallel, verify only what is expensive to get wrong.",
-  "version": "1.0.0",
+  "description": "Run multi-agent Workflow orchestration on a lean budget: scout inline, fan out narrow, set model and effort on every agent (they inherit your expensive session defaults otherwise), pipeline instead of parallel, and verify only what is expensive to get wrong. Installs as /ultracode-lite.",
+  "version": "1.1.0",
   "author": {
     "name": "voidharbor",
     "url": "https://github.com/voidharbor"
