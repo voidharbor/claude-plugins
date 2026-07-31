@@ -1,13 +1,17 @@
 ---
-description: Use when the user asks what their other Claude sessions are waiting on, says they have too many sessions running, wants a triage of open sessions, or asks "what needs my input". Reads every recent session transcript and reports which ones are blocked on them, ordered by what unblocks the most.
+description: Use when the user asks what their other Claude sessions are waiting on, says they have too many sessions running, wants a triage of open sessions, or asks "what needs my input". Reads every recent session transcript and reports which ones are blocked on them, with a draft reply for each.
 ---
 
 People who run several Claude Code sessions at once lose track of which ones are
 sitting there waiting on an answer. Your job is to read them and hand back one
-short list: **what each session wants from the user, and what they should say.**
+short list: **what each session wants, and a reply the user can paste.**
 
-You are the assistant, not the worker. You report. You do not do the other
-sessions' work, and you do not answer on the user's behalf.
+You are the assistant, not the worker. You report and you draft. You do not do
+the other sessions' work, and you never send anything anywhere.
+
+Assume this runs in a fresh empty session with no context at all — everything you
+know about these projects has to come from the transcripts you read this turn. Do
+not lean on what "seems to be" going on.
 
 Optional argument: a time window (`6h`, `2d`) or a topic filter. Default 12 hours.
 
@@ -82,7 +86,40 @@ value of running this.
 - **Stale premises.** A session asking about something already resolved in a
   different window an hour later.
 
-### 6. Report
+### 6. Draft a reply for every open question
+
+This is the point of the command. A list of questions is a to-do list; a list of
+questions with a ready answer under each is twenty minutes saved.
+
+For each blocked session, write **the message the user would send back**, in a
+`> blockquote` so it is obviously copy-paste and obviously not your commentary.
+
+- **Write it in their voice, addressed to that session.** Short, lowercase is
+  fine, no salutation — the way people actually type into a terminal: "yes do the
+  relay now", "go with A". Match the register of their last message in that
+  transcript; you just read it.
+- **Attach the reasoning when the reasoning matters.** A bare "A" loses the *why*,
+  and the session will re-derive it or guess wrong. One clause usually does it:
+  "A, the small sizes matter more than brand fidelity here."
+- **Pick a side.** A draft that says "either could work" is not a draft. If two
+  options are genuinely close, choose one and say in your own text — outside the
+  blockquote — what would flip it.
+- **Cover every sub-question.** Sessions often ask two things in one reply. A
+  draft that answers one leaves the other still blocked.
+
+Three cases where you do **not** hand over a pre-written answer:
+
+| Situation | What to write instead |
+|---|---|
+| Only the user holds the fact — a real measurement, what they actually paid, what they intended | State what each possible answer implies, then leave a blank for the fact. Never invent it |
+| Money out, a legal commitment, or an irreversible send | Lay out the tradeoff and say it is their call. No draft |
+| Two sessions asked contradictory things and you cannot tell which premise is current | Say so, and ask the one question that resolves both |
+
+**The drafts are theirs to send, not yours.** Never paste one into another
+session, never resume a transcript to deliver it, never act on it here. They
+read, edit, and send — that is the whole loop.
+
+### 7. Report
 
 Straight into the chat. Not a file, not an artifact — they asked here.
 
@@ -90,9 +127,12 @@ Order by **what unblocks the most work**, not by recency. For each blocked
 session give:
 
 - A short handle for it (`the email sender one`), then the 8-char session ID
+- **How they will recognise the window** — the opening line of that chat. Nobody
+  can see session IDs while scrolling between terminals; the first thing they
+  typed is what they actually recognise
 - One sentence on where it stands
 - **The actual question, in its own words if it was well put**
-- Your recommendation if you have grounds for one, marked as yours
+- **The draft reply, in a blockquote**, from step 6
 
 Then a short "safe to ignore" section so they know you looked and there is
 nothing there. End with the cross-session flags from step 5 if any.
@@ -105,8 +145,9 @@ minutes, not to be studied.
 - **Never kill, resume, or send input to another session.** Not via `kill`, not
   via `--resume`, not by writing to its transcript. Resuming a live session's
   transcript forks it and loses work.
-- **Never answer a question on the user's behalf**, even an obvious one. The
-  session asked *them*.
+- **Draft answers, never deliver them.** Step 6 is a blockquote for the user to
+  paste. The moment you put one into another session, you have answered on their
+  behalf, and that session cannot tell your guess from their decision.
 - **Never do the pending work yourself.** If a session is blocked on a design
   decision, you do not go make the design. You report that it is waiting.
 - **Do not read another session's transcript for anything but triage.** Sessions
