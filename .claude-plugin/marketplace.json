@@ -5,7 +5,7 @@
     "url": "https://github.com/voidharbor"
   },
   "metadata": {
-    "description": "Small, sharp Claude Code commands: answer briefly, audit what you have built, clean up after yourself, drive native macOS apps, and run multi-agent workflows without burning the budget."
+    "description": "Small, sharp Claude Code commands: answer briefly, audit what you have built, clean up after yourself, drive native macOS apps, recover what you last asked, and run multi-agent workflows without burning the budget."
   },
   "plugins": [
     {
@@ -73,6 +73,18 @@
       "description": "Triage every Claude Code session you have open and report which ones are blocked on you - the question each one asked, what only you can do, and where two sessions are duplicating work.",
       "version": "1.0.1",
       "source": "./c-assistant",
+      "category": "productivity",
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "refresh",
+      "description": "Show the last prompt you actually typed, word for word, read from the session transcript on disk rather than from a summarized context.",
+      "version": "1.0.0",
+      "source": "./refresh",
       "category": "productivity",
       "author": {
         "name": "voidharbor",

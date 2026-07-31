@@ -1,0 +1,9 @@
+{
+  "name": "refresh",
+  "description": "Show the last prompt you actually typed, word for word, read from the session transcript on disk rather than from a summarized context.",
+  "version": "1.0.0",
+  "author": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  }
+}
