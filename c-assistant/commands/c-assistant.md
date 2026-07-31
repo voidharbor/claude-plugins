@@ -32,6 +32,12 @@ from anything but a real clock reading.
 python3 "${CLAUDE_PLUGIN_ROOT}/scripts/session-scan.py" --hours 12 --self <your-own-session-id>
 ```
 
+**If the user passed a window, put it here.** `/c-assistant 2d` means `--hours 48`,
+`6h` means `--hours 6`. The `12` above is only the default for a bare invocation —
+running it after they asked for two days silently hides half of what they asked
+about. If they passed a topic filter instead of a window, keep 12 and filter when
+you report.
+
 Your session ID is in your system prompt — the scratchpad path contains it. Pass
 it, otherwise you report yourself back as a session needing input.
 
