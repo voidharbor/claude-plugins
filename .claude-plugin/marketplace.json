@@ -67,6 +67,18 @@
         "url": "https://github.com/voidharbor"
       },
       "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "c-assistant",
+      "description": "Triage every Claude Code session you have open and report which ones are blocked on you - the question each one asked, what only you can do, and where two sessions are duplicating work.",
+      "version": "1.0.0",
+      "source": "./c-assistant",
+      "category": "productivity",
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
     }
   ]
 }
