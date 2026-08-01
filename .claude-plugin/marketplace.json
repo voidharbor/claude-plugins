@@ -5,7 +5,7 @@
     "url": "https://github.com/voidharbor"
   },
   "metadata": {
-    "description": "Small, sharp Claude Code commands: answer briefly, audit what you have built, clean up after yourself, drive native macOS apps, recover what you last asked, and run multi-agent workflows without burning the budget."
+    "description": "Small, sharp Claude Code commands: answer briefly, audit what you have built, clean up after yourself, drive native macOS apps, recover what you last asked, run multi-agent workflows without burning the budget, and keep what you ship reviewed, fast, and improving."
   },
   "plugins": [
     {
