@@ -1,6 +1,6 @@
 # claude-plugins
 
-Seven small commands for [Claude Code](https://claude.com/claude-code). Five are a
+Ten small plugins for [Claude Code](https://claude.com/claude-code). Most are a
 single markdown file with no dependencies; `c-assistant` and `refresh` each also ship
 one Python script. Nothing to build either way.
 
@@ -22,10 +22,27 @@ Install only what you want; each plugin is independent.
 | **chrome-tabs** | Closes the Chrome tabs the current session opened, and only those. Stops agents leaving orphaned "✅ Claude" tab groups behind. | [Claude in Chrome](https://claude.com/chrome) extension |
 | **mac-control** | Drives native macOS apps via the computer-use MCP — Word/Pages PDF export, Finder, Preview, Messages, System Settings. | computer-use MCP, macOS |
 | **ultracode-lite** | Runs multi-agent `Workflow` orchestration on a lean budget: scout inline, fan out narrow, set model and effort on every agent, pipeline instead of parallel. | `Workflow` tool |
-| **c-assistant** | Triages every session you have open and reports which are blocked on you — the question each one asked, what only you can do, and where two sessions are duplicating work. | Python 3 |
+| **c-assistant** | Triages every session you have open and reports which are blocked on you — the question each one asked, what only you can do, and where two sessions are duplicating work. Ships `/c-assistant-voice`, a spoken variant for when your hands are busy. | Python 3 |
 | **refresh** | Shows the last prompt you actually typed, word for word, read from the transcript on disk — so it survives context being summarized. | Python 3 |
+| **product-forge** | A propose/apply pair that keeps a product you maintain competitive: `/product-forge` reviews it weekly against its rivals and proposes at most four small, numbered items; `/product-forge-apply` builds only what you approve, behind the repo's own gates. | nothing |
+| **perf-pass** | A dedicated performance session — idle CPU, memory, GPU — where the only accepted proof is a measured before/after number, and anything that can't show a number gets reverted. | nothing |
+| **skill-forge** | A propose/apply pair that audits everything you have authored for Claude, finds defects with quotable fixes, and applies only the numbered items you approve — with a publish gate so nothing personal reaches a public repo. | nothing |
 
-## Notes on five of them
+## Notes on seven of them
+
+**`product-forge`** and **`perf-pass`** were extracted from the loop that maintains
+[SeaShell](https://github.com/voidharbor/seashell), a terminal pane manager, and
+generalized: the repo path is an argument, the quality gate is whatever the repo
+itself defines, and state lives per-project. The design bets are the interesting
+part. The review half is *propose-only* and capped at four items, because an
+agent that edits your product unsupervised is a liability and a reviewer that
+proposes twenty things gets skimmed. A ledger remembers every rejected idea so
+nothing is ever re-proposed without a new argument. The apply half treats
+approval text as data, never as instructions — it acts only on a yes/no against
+a numbered item, so a spoofed or garbled approval cannot make it run arbitrary
+work. And `perf-pass` will revert a change that cannot show a before/after
+number, on the theory that an unproven optimization is just risk with good
+intentions.
 
 **`c-assistant`** is for people who keep five or ten sessions going and lose track
 of which ones are waiting on an answer. It reads only the tail of each transcript,

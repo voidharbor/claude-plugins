@@ -70,8 +70,8 @@
     },
     {
       "name": "c-assistant",
-      "description": "Triage every Claude Code session you have open and report which ones are blocked on you - the question each one asked, what only you can do, and where two sessions are duplicating work.",
-      "version": "1.0.1",
+      "description": "Triage every Claude Code session you have open and report which ones are blocked on you - the question each one asked, what only you can do, and where two sessions are duplicating work. Includes /c-assistant-voice, a spoken variant for when your hands are busy.",
+      "version": "1.1.0",
       "source": "./c-assistant",
       "category": "productivity",
       "author": {
@@ -85,6 +85,42 @@
       "description": "Show the last prompt you actually typed, word for word, read from the session transcript on disk rather than from a summarized context.",
       "version": "1.0.0",
       "source": "./refresh",
+      "category": "productivity",
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "product-forge",
+      "description": "A propose/apply loop that keeps a product competitive without letting it sprawl: weekly review against the tools people actually choose, filtered hard for small and genuinely useful, applied only after you approve each numbered item.",
+      "version": "1.0.0",
+      "source": "./product-forge",
+      "category": "productivity",
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "perf-pass",
+      "description": "A dedicated performance session for an app you maintain - idle CPU, memory, GPU cost - with measured before/after numbers as the only accepted proof, and a hard rule against touching a running copy.",
+      "version": "1.0.0",
+      "source": "./perf-pass",
+      "category": "productivity",
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "skill-forge",
+      "description": "A propose/apply loop that audits everything you have authored for Claude - commands, skills, helper scripts, published plugins - finds real defects with quotable fixes, and applies only the numbered items you approve.",
+      "version": "1.0.0",
+      "source": "./skill-forge",
       "category": "productivity",
       "author": {
         "name": "voidharbor",
