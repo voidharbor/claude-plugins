@@ -1,0 +1,9 @@
+{
+  "name": "perf-pass",
+  "description": "A dedicated performance session for an app you maintain - idle CPU, memory, GPU cost - with measured before/after numbers as the only accepted proof, and a hard rule against touching a running copy.",
+  "version": "1.0.0",
+  "author": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  }
+}
