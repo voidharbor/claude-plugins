@@ -139,6 +139,18 @@
         "url": "https://github.com/voidharbor"
       },
       "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "synth-mode",
+      "description": "A style contract for any text a real person will read. Kills the tells that make writing read as generated: trope phrases, over-polish, research recited back at the reader.",
+      "version": "1.0.0",
+      "source": "./synth-mode",
+      "category": "productivity",
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
     }
   ]
 }

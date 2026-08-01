@@ -1,0 +1,9 @@
+{
+  "name": "synth-mode",
+  "description": "A style contract for any text a real person will read - emails, replies, web copy, READMEs, posts. Kills the tells that make writing read as generated: the trope phrases, the over-polish, the research recited back at the reader. Named for Fallout 4's synths - the good ones pass.",
+  "version": "1.0.0",
+  "author": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  }
+}
