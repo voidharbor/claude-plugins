@@ -25,7 +25,8 @@ LOCK_STALE_S = 120
 def last_assistant_text(transcript_path):
     """Text of the last assistant message in the transcript's tail, "" when
     there is none. Reads only the final TAIL_BYTES so this stays cheap even
-    on multi-hundred-MB transcripts."""
+    on multi-hundred-MB transcripts. triage-and-push.py reimplements this
+    locally rather than importing it -- hyphenated filenames make cross-imports awkward."""
     try:
         size = os.path.getsize(transcript_path)
         with open(transcript_path, "rb") as f:
