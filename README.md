@@ -31,7 +31,7 @@ Or pick a la carte — each skill is also its own plugin, independent of the res
 | **chrome-tabs** | Closes the Chrome tabs the current session opened, and only those. Stops agents leaving orphaned "✅ Claude" tab groups behind. | [Claude in Chrome](https://claude.com/chrome) extension |
 | **mac-control** | Drives native macOS apps via the computer-use MCP — Word/Pages PDF export, Finder, Preview, Messages, System Settings. | computer-use MCP, macOS |
 | **ultracode-lite** | Runs multi-agent `Workflow` orchestration on a lean budget: scout inline, fan out narrow, set model and effort on every agent, pipeline instead of parallel. | `Workflow` tool |
-| **c-assistant** | Triages every session you have open and reports which are blocked on you — the question each one asked, what only you can do, and where two sessions are duplicating work. Ships `/c-assistant-voice`, a spoken variant for when your hands are busy. | Python 3 |
+| **c-assistant** | Two lanes: `/c-assistant` triages every session you have open on demand and reports which are blocked on you, with `/c-assistant-voice` as a spoken variant for when your hands are busy; a Lookout hook lane runs in the background and pushes a live approval card into SeaShell the moment a session stops on a real question. | Python 3; SeaShell 0.2.0+ for the hook lane |
 | **refresh** | Shows the last prompt you actually typed, word for word, read from the transcript on disk — so it survives context being summarized. | Python 3 |
 | **product-forge** | A propose/apply pair that keeps a product you maintain competitive: `/product-forge` reviews it weekly against its rivals and proposes at most four small, numbered items; `/product-forge-apply` builds only what you approve, behind the repo's own gates. | nothing |
 | **perf-pass** | A dedicated performance session — idle CPU, memory, GPU — where the only accepted proof is a measured before/after number, and anything that can't show a number gets reverted. | nothing |
@@ -78,6 +78,23 @@ session, and it will not answer a question on your behalf — the session asked
 *you*. The part worth having is the cross-session pass: two sessions solving the
 same problem separately, or one that concluded something is impossible while
 another is still building toward it.
+
+It ships two lanes. `/c-assistant` and its spoken twin `/c-assistant-voice` are
+the pull lane — you run them when you remember to. Lookout is the push lane: a
+SessionStart hook registers each session, a Stop hook prefilters every turn's
+end for something that actually looks like a real question, and only then does
+a detached worker ask a cheap model to judge it and push a live approval card
+straight into the SeaShell pane that asked. Lookout runs on macOS and Linux
+(not Windows) and needs SeaShell 0.2.0+ to have anywhere to push a card to —
+without it the hook stays silent and the pull lane still works on its own. The
+`voidharbor` bundle plugin does *not* carry the Lookout hooks; installing the
+bundle gets you the commands but never the cards, so live cards need the
+standalone install:
+
+```
+/plugin marketplace add voidharbor/claude-plugins
+/plugin install c-assistant@voidharbor
+```
 
 **`my-skills`** asks once which organizations and clients to treat as private, then
 classifies each thing you have written by whether a stranger could run it. The rule
