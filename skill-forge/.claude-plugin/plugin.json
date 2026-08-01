@@ -1,0 +1,9 @@
+{
+  "name": "skill-forge",
+  "description": "A propose/apply loop that audits everything you have authored for Claude - commands, skills, helper scripts, published plugins - finds real defects with quotable fixes, and applies only the numbered items you approve.",
+  "version": "1.0.0",
+  "author": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  }
+}
