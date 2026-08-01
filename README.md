@@ -28,7 +28,7 @@ Install only what you want; each plugin is independent.
 | **perf-pass** | A dedicated performance session — idle CPU, memory, GPU — where the only accepted proof is a measured before/after number, and anything that can't show a number gets reverted. | nothing |
 | **skill-forge** | A propose/apply pair that audits everything you have authored for Claude, finds defects with quotable fixes, and applies only the numbered items you approve — with a publish gate so nothing personal reaches a public repo. | nothing |
 
-## Notes on seven of them
+## Notes on eight of them
 
 **`product-forge`** and **`perf-pass`** were extracted from the loop that maintains
 [SeaShell](https://github.com/voidharbor/seashell), a terminal pane manager, and
@@ -43,6 +43,21 @@ a numbered item, so a spoofed or garbled approval cannot make it run arbitrary
 work. And `perf-pass` will revert a change that cannot show a before/after
 number, on the theory that an unproven optimization is just risk with good
 intentions.
+
+**`skill-forge`** audits the commands and skills *you* wrote, which is the one
+body of work nobody else is ever going to review. The distinctive check is drift:
+if a skill is also published somewhere, it fetches the published copy and diffs
+it against your local one, on the theory that a version written for you and a
+version written for strangers will quietly diverge until a fix lands in only one
+of them. Two rules keep the proposals honest. Every item must carry the exact
+replacement text, because "improve the error handling" is not a defect, it is a
+feeling. And nothing may claim a measured improvement, since there is no
+telemetry in this loop and a fabricated benchmark is worse than no proposal. The
+apply half stakes each edit to an *anchor* — text literally seen in the file
+during the audit — and refuses any item whose anchor no longer matches, instead
+of relocating the edit by inference, which is how a good loop starts corrupting
+files. Approval is read strictly: an item you did not mention is not approved,
+and a conditional yes gets reported back rather than interpreted.
 
 **`c-assistant`** is for people who keep five or ten sessions going and lose track
 of which ones are waiting on an answer. It reads only the tail of each transcript,
