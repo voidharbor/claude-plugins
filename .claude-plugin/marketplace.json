@@ -142,7 +142,7 @@
     },
     {
       "name": "synth-mode",
-      "description": "A style contract for any text a real person will read. Kills the tells that make writing read as generated: trope phrases, over-polish, research recited back at the reader.",
+      "description": "A style contract for any text a real person will read. Kills the tells that make writing read as generated: trope phrases, over-polish, research recited back at the reader. Named for Fallout 4's synths - the good ones pass.",
       "version": "1.0.0",
       "source": "./synth-mode",
       "category": "productivity",
