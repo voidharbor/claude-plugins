@@ -97,8 +97,9 @@ def run_triage(prompt, env):
     """Run the triage prompt through the Claude CLI's cheap tier on stdin
     and return raw stdout for parse_triage_output to make sense of."""
     return subprocess.run(
-        ["claude", "-p", "--model", "haiku"],  # CLI's own alias for its cheap tier, by design --
-                                                # pinned model ids are the CLI's business, not this script's
+        ["claude", "-p", "--model", "haiku",  # CLI's own alias for its cheap tier, by design --
+                                               # pinned model ids are the CLI's business, not this script's
+         "--tools", ""],  # triage needs zero tools; deny everything so injected transcript text cannot reach the user's allowlist
         input=prompt, capture_output=True, text=True, timeout=90, env=env,
     ).stdout
 

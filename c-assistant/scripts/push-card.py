@@ -46,11 +46,12 @@ def is_claude_main(cmd):
 
 
 def build_request(rec, question, draft, dry_run):
+    collapsed = one_line(draft) if draft is not None else None
     return {
         "cmd": "card",
         "paneId": rec["pane_id"],
         "question": one_line(question),
-        "draft": one_line(draft) if draft is not None else None,
+        "draft": collapsed or None,  # whitespace-only draft collapses to "" -- normalize to None
         "validateOnly": bool(dry_run),
     }
 

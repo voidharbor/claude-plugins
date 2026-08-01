@@ -6,7 +6,8 @@ a personal copy may also run — the write is idempotent.
 
 Fires on startup, resume, /clear, and compact -- so a long-lived window
 re-registers itself whenever its session id changes. Writes one small JSON
-file per session id; session-scan.py deletes entries whose process is gone.
+file per session id. Entries for dead processes are ignored by consumers and
+overwritten when a session re-registers.
 
 Must print nothing on stdout (SessionStart stdout is injected into the
 session's context) and must never fail loudly (a broken registry hook must
@@ -47,6 +48,8 @@ def find_claude_ancestor():
 
 
 def main():
+    if os.environ.get("LOOKOUT_TRIAGE"):
+        return  # headless triage must not register a ghost session pointing at the original pane
     try:
         data = json.load(sys.stdin)
     except Exception:
@@ -75,7 +78,7 @@ def main():
         "source": data.get("source", ""),
         "registered_at": time.time(),
     }
-    tmp = os.path.join(REG, f".{sid}.tmp")
+    tmp = os.path.join(REG, f".{sid}.{os.getpid()}.tmp")
     with open(tmp, "w") as f:
         json.dump(rec, f)
     os.replace(tmp, os.path.join(REG, f"{sid}.json"))

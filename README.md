@@ -1,8 +1,9 @@
 # claude-plugins
 
 Twelve small skills for [Claude Code](https://claude.com/claude-code). Most are a
-single markdown file with no dependencies; `c-assistant` and `refresh` each also ship
-one Python script. Nothing to build either way.
+single markdown file with no dependencies; `refresh` also ships one Python script,
+and `c-assistant` ships five, plus the hooks and prompt its background lane needs.
+Nothing to build either way.
 
 ## Install
 
@@ -129,8 +130,9 @@ or dropped, so a bounded sweep never reads as exhaustive coverage.
 
 ## Requirements
 
-Claude Code with plugin support. `mac-control` is macOS-only; the rest are
-platform-independent.
+Claude Code with plugin support. `mac-control` is macOS-only; `c-assistant`'s
+Lookout hook lane needs macOS/Linux with `python3` on PATH (elsewhere it stays
+inert); the rest are platform-independent.
 
 ## License
 

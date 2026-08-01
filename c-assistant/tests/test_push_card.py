@@ -35,6 +35,7 @@ class PushCard(unittest.TestCase):
         self.assertEqual(req["draft"], "a b")
         self.assertTrue(req["validateOnly"])
         self.assertEqual(req["cmd"], "card")
+        self.assertIsNone(mod.build_request({"pane_id": "p1"}, "q?", "   ", False)["draft"])
 
     def test_deliver_round_trip(self):
         mod = load_mod()
