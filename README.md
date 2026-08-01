@@ -37,7 +37,7 @@ Or pick a la carte — each skill is also its own plugin, independent of the res
 | **perf-pass** | A dedicated performance session — idle CPU, memory, GPU — where the only accepted proof is a measured before/after number, and anything that can't show a number gets reverted. | nothing |
 | **skill-forge** | A propose/apply pair that audits everything you have authored for Claude, finds defects with quotable fixes, and applies only the numbered items you approve — with a publish gate so nothing personal reaches a public repo. | nothing |
 | **memory-curate** | Audits what Claude remembers across sessions — stale facts, duplicates, files that grew into documents, memories trapped in a project you no longer open — and proposes numbered fixes. Additions must quote your own words, so it never memorises a claim that got corrected an hour later. | Python 3 |
-| **synth-mode** | A style contract for anything a real person will read. A skill, not a command: it loads before any human-facing writing and kills the tells that read as generated, from trope phrases to over-polish to reciting research back at the reader. Named for Fallout 4's synths — the good ones pass. | nothing |
+| **synth-mode** | A style contract for anything a real person will read. A skill, not a command: it loads before any human-facing writing and kills the tells that read as generated, from trope phrases to over-polish to reciting research back at the reader. Named for Fallout 4's gen 3 synths. | nothing |
 
 ## Notes on eight of them
 
