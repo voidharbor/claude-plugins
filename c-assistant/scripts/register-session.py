@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """SessionStart hook: record this session's (id, pid, tty, app) in
-~/.claude/session-registry/ so session-scan.py can tell live terminal
-sessions apart from dead transcripts. Ships with the c-assistant plugin;
-a personal copy may also run — the write is idempotent.
+~/.claude/session-registry/ so the Lookout hook lane (needs-input-hook.py,
+push-card.py, triage-and-push.py) can resolve sessions to SeaShell panes.
+Ships with the c-assistant plugin; a personal copy may also run — the
+write is idempotent.
 
 Fires on startup, resume, /clear, and compact -- so a long-lived window
 re-registers itself whenever its session id changes. Writes one small JSON
