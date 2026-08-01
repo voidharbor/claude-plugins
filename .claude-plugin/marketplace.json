@@ -151,6 +151,18 @@
         "url": "https://github.com/voidharbor"
       },
       "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "voidharbor",
+      "description": "The whole set in one install - all twelve skills, namespaced /voidharbor:<name>. Install this bundle, or pick skills a la carte below.",
+      "version": "1.0.0",
+      "source": "./voidharbor",
+      "category": "productivity",
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
     }
   ]
 }

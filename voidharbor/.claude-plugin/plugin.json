@@ -1,0 +1,9 @@
+{
+  "name": "voidharbor",
+  "description": "All twelve voidharbor skills in one install: efmtu, my-skills, chrome-tabs, mac-control, ultracode-lite, c-assistant, refresh, product-forge, perf-pass, skill-forge, memory-curate, synth-mode.",
+  "version": "1.0.0",
+  "author": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  }
+}

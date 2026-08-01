@@ -1,21 +1,30 @@
 # claude-plugins
 
-Twelve small plugins for [Claude Code](https://claude.com/claude-code). Most are a
+Twelve small skills for [Claude Code](https://claude.com/claude-code). Most are a
 single markdown file with no dependencies; `c-assistant` and `refresh` each also ship
 one Python script. Nothing to build either way.
 
 ## Install
+
+Everything at once:
+
+```
+/plugin marketplace add voidharbor/claude-plugins
+/plugin install voidharbor@voidharbor
+```
+
+That gives you all twelve, namespaced as `/voidharbor:<name>` (e.g. `/voidharbor:refresh`).
+
+Or pick a la carte — each skill is also its own plugin, independent of the rest:
 
 ```
 /plugin marketplace add voidharbor/claude-plugins
 /plugin install efmtu@voidharbor
 ```
 
-Install only what you want; each plugin is independent.
+## The skills
 
-## The plugins
-
-| Plugin | What it does | Needs |
+| Skill | What it does | Needs |
 |---|---|---|
 | **efmtu** | *Easy For Me To Understand.* Answers short and simple — three sentences or five bullets, answer first, plain words. | nothing |
 | **my-skills** | Inventories everything *you* have authored (commands, skills, agents, hooks, routines) and sorts it generic → personal → private, so you know what is safe to publish. | nothing |
