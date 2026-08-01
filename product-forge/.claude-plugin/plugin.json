@@ -1,0 +1,9 @@
+{
+  "name": "product-forge",
+  "description": "A propose/apply loop that keeps a product competitive without letting it sprawl: weekly review against the tools people actually choose, filtered hard for small and genuinely useful, applied only after you approve each numbered item.",
+  "version": "1.0.0",
+  "author": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  }
+}
