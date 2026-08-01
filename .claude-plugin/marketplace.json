@@ -5,7 +5,7 @@
     "url": "https://github.com/voidharbor"
   },
   "metadata": {
-    "description": "Small, sharp Claude Code commands: answer briefly, audit what you have built, clean up after yourself, drive native macOS apps, recover what you last asked, run multi-agent workflows without burning the budget, and keep what you ship reviewed, fast, and improving."
+    "description": "Small, sharp Claude Code commands: answer briefly, audit what you have built, clean up after yourself, drive native macOS apps, recover what you last asked, keep what Claude remembers accurate, run multi-agent workflows without burning the budget, and keep what you ship reviewed, fast, and improving."
   },
   "plugins": [
     {
@@ -121,6 +121,18 @@
       "description": "A propose/apply loop that audits everything you have authored for Claude - commands, skills, helper scripts, published plugins - finds real defects with quotable fixes, and applies only the numbered items you approve.",
       "version": "1.0.0",
       "source": "./skill-forge",
+      "category": "productivity",
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "memory-curate",
+      "description": "Audit what Claude remembers across sessions and propose fixes: stale facts, duplicates, oversized files, and memories trapped in a project you no longer open. Proposes only - nothing is written until you approve numbered items.",
+      "version": "1.0.0",
+      "source": "./memory-curate",
       "category": "productivity",
       "author": {
         "name": "voidharbor",

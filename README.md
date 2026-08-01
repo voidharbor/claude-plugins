@@ -1,6 +1,6 @@
 # claude-plugins
 
-Ten small plugins for [Claude Code](https://claude.com/claude-code). Most are a
+Eleven small plugins for [Claude Code](https://claude.com/claude-code). Most are a
 single markdown file with no dependencies; `c-assistant` and `refresh` each also ship
 one Python script. Nothing to build either way.
 
@@ -27,6 +27,7 @@ Install only what you want; each plugin is independent.
 | **product-forge** | A propose/apply pair that keeps a product you maintain competitive: `/product-forge` reviews it weekly against its rivals and proposes at most four small, numbered items; `/product-forge-apply` builds only what you approve, behind the repo's own gates. | nothing |
 | **perf-pass** | A dedicated performance session — idle CPU, memory, GPU — where the only accepted proof is a measured before/after number, and anything that can't show a number gets reverted. | nothing |
 | **skill-forge** | A propose/apply pair that audits everything you have authored for Claude, finds defects with quotable fixes, and applies only the numbered items you approve — with a publish gate so nothing personal reaches a public repo. | nothing |
+| **memory-curate** | Audits what Claude remembers across sessions — stale facts, duplicates, files that grew into documents, memories trapped in a project you no longer open — and proposes numbered fixes. Additions must quote your own words, so it never memorises a claim that got corrected an hour later. | Python 3 |
 
 ## Notes on eight of them
 

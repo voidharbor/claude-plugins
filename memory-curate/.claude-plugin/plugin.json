@@ -1,0 +1,9 @@
+{
+  "name": "memory-curate",
+  "description": "Audit what Claude remembers across sessions and propose fixes: stale facts, duplicates, oversized files, and memories trapped in a project you no longer open. Proposes only - nothing is written until you approve numbered items.",
+  "version": "1.0.0",
+  "author": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  }
+}
