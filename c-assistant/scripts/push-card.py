@@ -47,13 +47,44 @@ def is_claude_main(cmd):
 
 def build_request(rec, question, draft, dry_run):
     collapsed = one_line(draft) if draft is not None else None
-    return {
+    req = {
         "cmd": "card",
         "paneId": rec["pane_id"],
         "question": one_line(question),
         "draft": collapsed or None,  # whitespace-only draft collapses to "" -- normalize to None
         "validateOnly": bool(dry_run),
     }
+    # A pane id is only unique within one SeaShell run; the registered tty is
+    # the identity that survives a restart. The server refuses on mismatch, so
+    # a stale entry can never land a card on whoever wears the pane id now.
+    tty = rec.get("tty")
+    if tty and tty != "??":
+        req["tty"] = tty
+    return req
+
+
+def resolve_session(reg_dir, prefix, is_live):
+    """(record, None) for exactly one LIVE entry matching the prefix, else
+    (None, reason). Dead entries never block resolution: they are not hits,
+    and sharing a prefix with one is not ambiguity -- the registry
+    accumulates between prunes."""
+    hits = [f for f in glob.glob(os.path.join(reg_dir, "*.json"))
+            if os.path.basename(f).startswith(prefix)]
+    if not hits:
+        return None, f"no live session registered matching '{prefix}'"
+    recs = []
+    for path in hits:
+        try:
+            with open(path) as fh:
+                recs.append(json.load(fh))
+        except Exception:
+            continue  # unreadable entry: treat as dead
+    live = [r for r in recs if is_live(r.get("pid", -1))]
+    if not live:
+        return None, "the session's claude process is gone (window closed or /clear'd)"
+    if len(live) > 1:
+        return None, f"'{prefix}' is ambiguous ({len(live)} live sessions) -- use more characters"
+    return live[0], None
 
 
 def deliver(sock_path, req):
@@ -117,24 +148,19 @@ def main():
         sys.exit(2)
     prefix, question, draft, dry_run = parsed
 
-    hits = [f for f in glob.glob(os.path.join(REG, "*.json"))
-            if os.path.basename(f).startswith(prefix)]
-    if not hits:
-        die(f"no live session registered matching '{prefix}'")
-    if len(hits) > 1:
-        die(f"'{prefix}' is ambiguous ({len(hits)} sessions) -- use more characters")
-    with open(hits[0]) as fh:
-        rec = json.load(fh)
+    def is_live(pid):
+        cmd = subprocess.run(
+            ["ps", "-p", str(pid), "-o", "command="],
+            capture_output=True, text=True,
+        ).stdout.strip()
+        return is_claude_main(cmd)
+
+    rec, err = resolve_session(REG, prefix, is_live)
+    if rec is None:
+        die(err)
 
     if not rec.get("pane_id"):
         die("that session is not in a SeaShell pane -- it can never receive a card")
-
-    cmd = subprocess.run(
-        ["ps", "-p", str(rec.get("pid", -1)), "-o", "command="],
-        capture_output=True, text=True,
-    ).stdout.strip()
-    if not is_claude_main(cmd):
-        die("the session's claude process is gone (window closed or /clear'd)")
 
     req = build_request(rec, question, draft, dry_run)
     q, d = req["question"], req["draft"]

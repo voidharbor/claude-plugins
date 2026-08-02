@@ -14,9 +14,33 @@ Must print nothing on stdout (SessionStart stdout is injected into the
 session's context) and must never fail loudly (a broken registry hook must
 not break session start).
 """
-import json, os, subprocess, sys, time
+import glob, json, os, subprocess, sys, time
 
 REG = os.path.expanduser("~/.claude/session-registry")
+
+
+def prune_dead_entries(reg_dir, live_pids, keep_sid):
+    """Remove entries whose recorded process is gone, plus unreadable ones.
+
+    Runs on every registration so the registry tracks reality instead of
+    accumulating: measured 2026-08-02, 55 of 68 entries carried dead pids
+    after a single day. keep_sid is never pruned -- our own entry may race
+    this scan. Best-effort throughout: a prune failure must never break
+    registration."""
+    for path in glob.glob(os.path.join(reg_dir, "*.json")):
+        if os.path.basename(path) == keep_sid + ".json":
+            continue
+        try:
+            with open(path) as f:
+                rec = json.load(f)
+            alive = str(rec.get("pid", "")) in live_pids
+        except Exception:
+            alive = False  # unreadable entry: nothing can ever resolve it
+        if not alive:
+            try:
+                os.remove(path)
+            except OSError:
+                pass
 
 
 def ps_field(pid, field):
@@ -83,6 +107,16 @@ def main():
     with open(tmp, "w") as f:
         json.dump(rec, f)
     os.replace(tmp, os.path.join(REG, f"{sid}.json"))
+
+    try:
+        live = set(
+            subprocess.run(
+                ["ps", "-axo", "pid="], capture_output=True, text=True, timeout=5
+            ).stdout.split()
+        )
+    except Exception:
+        return  # no snapshot, no pruning -- never guess at liveness
+    prune_dead_entries(REG, live, sid)
 
 
 if __name__ == "__main__":
