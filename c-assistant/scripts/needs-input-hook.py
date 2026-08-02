@@ -13,13 +13,52 @@ process never waits on it and never releases the lock itself.
 Must print nothing on stdout (Stop stdout is injected into the session's
 context) and must never fail loudly (a broken hook must not break Stop).
 """
-import json, os, platform, subprocess, sys, time
+import json, os, platform, re, subprocess, sys, time
 
 STATE_DIR = os.path.expanduser("~/.claude/lookout")
 REGISTRY_DIR = os.path.expanduser("~/.claude/session-registry")
 COOLDOWN_S = 180
 TAIL_BYTES = 65536
 LOCK_STALE_S = 120
+
+# How much of the closing text to search for an implicit ask. The ask lives in
+# the sign-off; searching the whole message would let a phrase quoted halfway
+# through a long report trigger a spawn.
+ASK_TAIL_CHARS = 400
+
+# A turn can be blocked on the user with no question mark anywhere in it:
+# "just say go", "let me know which", "your call". Measured across 43 real
+# panes on 2026-08-02, a literal-`?` gate passed 11 and this one passes 13 —
+# a modest gain, not a fix for a dead feature, and worth stating plainly so
+# nobody credits this with more than it does.
+#
+# Being wrong in the two directions costs very different amounts. A false
+# positive spawns one cheap triage call that answers `card: false` and nothing
+# reaches the user. A false negative silently disables the whole feature. So
+# this leans permissive, and triage-and-push.py stays the real judge.
+#
+# Phrases are matched only in the closing ASK_TAIL_CHARS, and each is anchored
+# on both sides so past-tense narration does not trip it ("I told the build to
+# skip signing" must not read as "tell me").
+WAITING_RE = re.compile(
+    r"(?:^|\W)("
+    r"just say|say the word|say go|"
+    r"let me know|tell me which|if you tell me|"
+    r"want me to|would you like me to|shall i|should i|"
+    r"your call|up to you|which would you|do you want"
+    r")(?:\W|$)",
+    re.IGNORECASE,
+)
+
+
+def looks_like_ask(text):
+    """True when the turn reads as waiting on the user.
+
+    Kept deliberately cheap: this runs on every Stop event in every session.
+    """
+    if "?" in text:
+        return True
+    return WAITING_RE.search(text[-ASK_TAIL_CHARS:]) is not None
 
 
 def last_assistant_text(transcript_path):
@@ -80,7 +119,7 @@ def should_triage(payload, env, sysname, registry_dir, state_dir):
     if not reg.get("pane_id"):
         return False, "no-pane"
 
-    if "?" not in last_assistant_text(transcript_path):
+    if not looks_like_ask(last_assistant_text(transcript_path)):
         return False, "no-question"
 
     state_path = os.path.join(state_dir, sid + ".json")

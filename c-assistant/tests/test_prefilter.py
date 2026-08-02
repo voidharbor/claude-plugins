@@ -68,5 +68,59 @@ class Prefilter(unittest.TestCase):
         t = write_transcript(self.tmp.name, [assistant("first?"), {"type": "user"}, assistant("second — no q")])
         self.assertIn("second", self.mod.last_assistant_text(t))
 
+
+class ImplicitAsks(Prefilter):
+    """A turn can be blocked on the user without containing a question mark.
+
+    Every string below is copied from a real transcript of a session that was
+    sitting waiting while the literal-`?` prefilter refused it as "no-question"
+    (surveyed across 43 real panes, 2026-08-02: the old gate passed 11, this
+    one passes 13 — a real gain, but not the reason the plugin lane was silent).
+
+    The prefilter is only a cost gate — triage-and-push.py runs the model and
+    pushes a card only on `card: true` — so a false positive here costs one
+    cheap call, while a false negative costs the entire feature.
+    """
+
+    def assertGoes(self, text):
+        t = write_transcript(self.tmp.name, [assistant(text)])
+        ok, why = self.mod.should_triage(self.payload(t), {}, "Darwin", self.reg, self.state)
+        self.assertTrue(ok, "refused %r for %r" % (why, text[-60:]))
+
+    def assertRefused(self, text):
+        t = write_transcript(self.tmp.name, [assistant(text)])
+        ok, why = self.mod.should_triage(self.payload(t), {}, "Darwin", self.reg, self.state)
+        self.assertEqual((ok, why), (False, "no-question"))
+
+    def test_just_say_go(self):
+        self.assertGoes('Once you\'ve switched it, just say "go" and I\'ll start.')
+
+    def test_if_you_tell_me(self):
+        self.assertGoes("If you tell me where you saw the 2GB, I can pin it to the exact process.")
+
+    def test_say_the_word(self):
+        self.assertGoes("Say the word once it's on and I'll request again.")
+
+    def test_want_me_to(self):
+        self.assertGoes("Want me to start on the detector fix.")
+
+    def test_let_me_know(self):
+        self.assertGoes("Both routes work. Let me know which you'd prefer.")
+
+    def test_your_call(self):
+        self.assertGoes("I'd take the second one, but it's your call.")
+
+    # --- and the refusals still have to hold ---
+
+    def test_plain_completion_still_refused(self):
+        self.assertRefused("All done. Committed and pushed.")
+
+    def test_confirmed_is_not_a_request_to_confirm(self):
+        self.assertRefused("Confirmed the fix works. Tests are green.")
+
+    def test_told_in_past_tense_is_not_an_ask(self):
+        self.assertRefused("I told the build to skip signing, and it did.")
+
+
 if __name__ == "__main__":
     unittest.main()

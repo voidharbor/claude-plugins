@@ -71,7 +71,7 @@
     {
       "name": "c-assistant",
       "description": "Triage every Claude Code session you have open and report which ones are blocked on you - the question each one asked, what only you can do, and where two sessions are duplicating work. Includes /c-assistant-voice, a spoken variant for when your hands are busy. Designed to work best with SeaShell: with SeaShell 0.2.0+ it pushes live approval cards into the terminal when a session stops on a question.",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "source": "./c-assistant",
       "category": "productivity",
       "author": {
