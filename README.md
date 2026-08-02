@@ -88,14 +88,17 @@ a detached worker ask a cheap model to judge it and push a live approval card
 straight into the SeaShell pane that asked. Lookout runs on macOS and Linux
 (not Windows) and needs SeaShell 0.2.0+ to have anywhere to push a card to —
 without it the hook stays silent and the pull lane still works on its own. The
-`voidharbor` bundle plugin does *not* carry the Lookout hooks; installing the
-bundle gets you the commands but never the cards, so live cards need the
-standalone install:
+`voidharbor` bundle ships these hooks too, so either install works:
 
 ```
 /plugin marketplace add voidharbor/claude-plugins
-/plugin install c-assistant@voidharbor
+/plugin install c-assistant@voidharbor   # just this plugin
+/plugin install voidharbor@voidharbor    # or the whole bundle, hooks included
 ```
+
+Installing both is fine: at every hook entry the bundle's copy checks whether
+standalone c-assistant is installed and enabled, and if so returns immediately —
+one triage, one card, never two.
 
 **`my-skills`** asks once which organizations and clients to treat as private, then
 classifies each thing you have written by whether a stranger could run it. The rule
