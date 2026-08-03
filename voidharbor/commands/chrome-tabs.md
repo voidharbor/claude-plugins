@@ -44,12 +44,17 @@ Leaving a tab open costs nothing. Closing one that was still needed costs a re-l
 
 ## What you cannot do
 
-- **You cannot close another session's group.** Not through the MCP (scoped to
-  yours), and not through computer-use — Chrome is granted at **read** tier, so
-  clicks and keystrokes are blocked there by design.
-- **Never use `osascript` to close Chrome tabs.** AppleScript can list tabs but
-  cannot see tab groups, so it cannot tell a Claude tab from one of the user's. It
-  is the one tool that will cheerfully close the wrong thing.
+- **You cannot close another session's group *from this skill*.** Not through the
+  MCP (scoped to yours), and not through computer-use — Chrome is granted at
+  **read** tier, so clicks and keystrokes are blocked there by design.
+  Cross-session cleanup is a separate plugin: **`chrome-tabs-all`**, which closes
+  tabs by exact tab ID harvested from other sessions' transcripts. Point the user
+  at it when they want the whole tab strip cleared; do not improvise it here.
+- **Never use `osascript` to close a Chrome tab you identified by URL or title.**
+  AppleScript cannot see tab groups, so it cannot tell a Claude tab from one of
+  the user's — duplicate URLs across the two are the normal case. It is the one
+  tool that will cheerfully close the wrong thing. (Closing by *exact tab ID* is
+  sound and is what `chrome-tabs-all` does; guessing from a URL never is.)
 - Leftover "✅ Claude" chips from sessions that ended without cleaning up are the
   user's to clear: right-click the chip → **Close group**. Report how many you can
   see and stop there.

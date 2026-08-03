@@ -1,0 +1,9 @@
+{
+  "name": "chrome-tabs-all",
+  "description": "Clear every leftover Claude tab group in Chrome, not just this session's. Closes tabs by exact tab ID harvested from other sessions' transcripts - never by URL, because your tabs and Claude's routinely share URLs. Leaves live sessions and your own tabs alone. macOS + Chrome.",
+  "version": "1.0.0",
+  "author": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  }
+}

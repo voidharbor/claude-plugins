@@ -1,8 +1,9 @@
 # claude-plugins
 
-Twelve small skills for [Claude Code](https://claude.com/claude-code). Most are a
+Thirteen small skills for [Claude Code](https://claude.com/claude-code). Most are a
 single markdown file with no dependencies; `refresh` also ships one Python script,
-and `c-assistant` ships five, plus the hooks and prompt its background lane needs.
+`chrome-tabs-all` one, and `c-assistant` five, plus the hooks and prompt its
+background lane needs.
 Nothing to build either way.
 
 ## Install
@@ -14,7 +15,7 @@ Everything at once:
 /plugin install voidharbor@voidharbor
 ```
 
-That gives you all twelve, namespaced as `/voidharbor:<name>` (e.g. `/voidharbor:refresh`).
+That gives you all thirteen, namespaced as `/voidharbor:<name>` (e.g. `/voidharbor:refresh`).
 
 Or pick a la carte — each skill is also its own plugin, independent of the rest:
 
@@ -30,6 +31,7 @@ Or pick a la carte — each skill is also its own plugin, independent of the res
 | **efmtu** | *Easy For Me To Understand.* Answers short and simple — three sentences or five bullets, answer first, plain words. | nothing |
 | **my-skills** | Inventories everything *you* have authored (commands, skills, agents, hooks, routines) and sorts it generic → personal → private, so you know what is safe to publish. | nothing |
 | **chrome-tabs** | Closes the Chrome tabs the current session opened, and only those. Stops agents leaving orphaned "✅ Claude" tab groups behind. | [Claude in Chrome](https://claude.com/chrome) extension |
+| **chrome-tabs-all** | Clears *every* leftover "✅ Claude" tab group, not just this session's — including ones whose session already ended. Closes by exact tab ID, never by URL, so your own tabs survive even when they share a URL with Claude's. | [Claude in Chrome](https://claude.com/chrome) extension, Python 3, macOS |
 | **mac-control** | Drives native macOS apps via the computer-use MCP — Word/Pages PDF export, Finder, Preview, Messages, System Settings. | computer-use MCP, macOS |
 | **ultracode-lite** | Runs multi-agent `Workflow` orchestration on a lean budget: scout inline, fan out narrow, set model and effort on every agent, pipeline instead of parallel. | `Workflow` tool |
 | **c-assistant** | Two lanes: `/c-assistant` triages every session you have open on demand and reports which are blocked on you, with `/c-assistant-voice` as a spoken variant for when your hands are busy; a Lookout hook lane runs in the background and pushes a live approval card into SeaShell the moment a session stops on a real question. | Python 3; SeaShell 0.2.0+ for the hook lane |
@@ -40,7 +42,7 @@ Or pick a la carte — each skill is also its own plugin, independent of the res
 | **memory-curate** | Audits what Claude remembers across sessions — stale facts, duplicates, files that grew into documents, memories trapped in a project you no longer open — and proposes numbered fixes. Additions must quote your own words, so it never memorises a claim that got corrected an hour later. | Python 3 |
 | **synth-mode** | A style contract for anything a real person will read. A skill, not a command: it loads before any human-facing writing and kills the tells that read as generated, from trope phrases to over-polish to reciting research back at the reader. Named for Fallout 4's gen 3 synths. | nothing |
 
-## Notes on eight of them
+## Notes on nine of them
 
 **`product-forge`** and **`perf-pass`** were extracted from the loop that maintains
 [SeaShell](https://github.com/voidharbor/seashell), a terminal pane manager, and
@@ -99,6 +101,22 @@ without it the hook stays silent and the pull lane still works on its own. The
 Installing both is fine: at every hook entry the bundle's copy checks whether
 standalone c-assistant is installed and enabled, and if so returns immediately —
 one triage, one card, never two.
+
+**`chrome-tabs-all`** exists because `chrome-tabs` deliberately refuses to reach
+past its own tab group, and eventually you have a tab strip full of "✅ Claude"
+chips from sessions that ended hours ago. The problem was never closing tabs, it
+was *identifying* them: AppleScript can enumerate Chrome but cannot see tab
+groups, so it cannot tell a Claude tab from one of yours. Matching on the URL is
+the obvious idea and the dangerous one — in the run this was built from, a single
+X profile URL was open three times, twice by dead sessions and once by the user.
+What makes it tractable is that Chrome's AppleScript `id of tab` is the *same
+integer* the extension reports as `tabId`, and every session records its group's
+tab IDs in its own transcript. So the tabs get closed by exact ID and nothing is
+ever inferred from a URL. Two guards keep the ID meaningful: only transcript
+entries newer than Chrome's process start are read, since tab IDs are unique
+only within one Chrome run, and a session counts as ended only if its process is
+gone *and* its transcript has gone quiet. Live sessions keep their tabs unless
+you say otherwise, and tabs no session claims are yours and are never touched.
 
 **`my-skills`** asks once which organizations and clients to treat as private, then
 classifies each thing you have written by whether a stranger could run it. The rule

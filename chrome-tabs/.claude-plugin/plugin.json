@@ -1,6 +1,9 @@
 {
   "name": "chrome-tabs",
-  "description": "Close the Chrome tabs this session opened, and only those - so agents stop leaving orphaned tab groups behind. Requires the Claude in Chrome extension.",
-  "version": "1.0.0",
-  "author": {"name":"voidharbor","url":"https://github.com/voidharbor"}
+  "description": "Close the Chrome tabs this session opened, and only those - so agents stop leaving orphaned tab groups behind. For groups left by sessions that already ended, see chrome-tabs-all. Requires the Claude in Chrome extension.",
+  "version": "1.1.0",
+  "author": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  }
 }

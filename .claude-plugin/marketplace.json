@@ -34,8 +34,8 @@
     },
     {
       "name": "chrome-tabs",
-      "description": "Close the Chrome tabs this session opened, and only those - so agents stop leaving orphaned tab groups behind. Requires the Claude in Chrome extension.",
-      "version": "1.0.0",
+      "description": "Close the Chrome tabs this session opened, and only those - so agents stop leaving orphaned tab groups behind. For groups left by sessions that already ended, see chrome-tabs-all. Requires the Claude in Chrome extension.",
+      "version": "1.1.0",
       "source": "./chrome-tabs",
       "category": "productivity",
       "author": {
@@ -153,9 +153,21 @@
       "homepage": "https://github.com/voidharbor/claude-plugins"
     },
     {
+      "name": "chrome-tabs-all",
+      "description": "Clear every leftover Claude tab group in Chrome, not just this session's. Closes tabs by exact tab ID harvested from other sessions' transcripts - never by URL, because your tabs and Claude's routinely share URLs. Leaves live sessions and your own tabs alone. macOS + Chrome.",
+      "version": "1.0.0",
+      "source": "./chrome-tabs-all",
+      "category": "productivity",
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
       "name": "voidharbor",
-      "description": "The whole set in one install - all twelve skills, namespaced /voidharbor:<name>, plus the c-assistant Lookout hooks, so SeaShell approval cards work from this bundle alone. Safe alongside a standalone c-assistant install: the hooks detect the duplicate and only one copy runs. Install this bundle, or pick skills a la carte below.",
-      "version": "1.1.0",
+      "description": "The whole set in one install - all thirteen skills, namespaced /voidharbor:<name>, plus the c-assistant Lookout hooks, so SeaShell approval cards work from this bundle alone. Safe alongside a standalone c-assistant install: the hooks detect the duplicate and only one copy runs. Install this bundle, or pick skills a la carte below.",
+      "version": "1.2.0",
       "source": "./voidharbor",
       "category": "productivity",
       "author": {
