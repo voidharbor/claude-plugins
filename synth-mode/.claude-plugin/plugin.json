@@ -1,7 +1,7 @@
 {
   "name": "synth-mode",
-  "description": "Strips the tells that make writing read as machine-made, instead of adding style to fake a human. Picks one register per reader, kills trope phrases and over-polish, and replaces the best line in every draft with the plain version, because nobody writing a real email lands a good one. Named for Fallout 4's synths - the good ones pass.",
-  "version": "2.0.0",
+  "description": "Makes writing stop sounding machine-made, by removing tells rather than adding style to fake a human. Picks one register per reader, kills trope phrases and over-polish, and replaces the best line in every draft with the plain version, because nobody writing a real email lands a good one. Learns your voice from samples you confirm you typed yourself. Named for Fallout 4's synths - the good ones pass.",
+  "version": "2.1.0",
   "author": {
     "name": "voidharbor",
     "url": "https://github.com/voidharbor"

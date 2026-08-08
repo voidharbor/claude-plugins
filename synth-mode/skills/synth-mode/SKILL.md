@@ -52,11 +52,17 @@ what collapses every surface into a single voice.
 
 **2. Read the matching block in `registers.md`, and only that block.**
 
-**3. Get a voice reference, or declare that you have none.** Ask the user for three or
-four things they wrote themselves, unassisted, to a real person. If they have none to
-hand, say plainly that you are writing without a voice reference, then remove tells only
-and do not attempt to imitate anyone. An invented voice is worse than writing with no
-voice reference at all.
+**3. Load the voice profile, or declare that you have none.** Check for
+`~/.claude/synth-mode/voice.md`. If it is there, read it and match the samples for
+length, opener, closing and punctuation.
+
+If it is not there, do not stop to build one. Draft the thing that was asked for using
+tell-removal only, say in one line that you are writing without a voice reference, and
+offer to build the profile once the current task is done. `voice-capture.md` has the
+procedure, including the check for whether a sample was actually typed by the user.
+
+With no profile, do not attempt to imitate anyone. An invented voice is worse than
+writing with no voice reference at all.
 
 **4. Draft.**
 
