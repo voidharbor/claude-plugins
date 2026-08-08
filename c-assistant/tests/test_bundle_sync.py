@@ -15,6 +15,12 @@ SYNCED = [
     ("scripts/push-card.py", "scripts/push-card.py"),
     ("scripts/triage-and-push.py", "scripts/triage-and-push.py"),
     ("scripts/triage-prompt.md", "scripts/triage-prompt.md"),
+    # Was missing from this list, and had duly drifted: the bundle's copy told
+    # the reader to run ~/.claude/bin/session-scan.py, a path that exists on
+    # one machine and nobody else's. The list is the only thing keeping the
+    # copies honest, so a file shipped in both and absent here is a file free
+    # to diverge silently.
+    ("scripts/session-scan.py", "scripts/session-scan.py"),
 ]
 
 

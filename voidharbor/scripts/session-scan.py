@@ -2,7 +2,8 @@
 """Scan Claude Code session transcripts and report which ones are waiting on the user.
 
 Usage:
-  python3 ~/.claude/bin/session-scan.py [--hours 12] [--self <session-id>] [--full <session-id>]
+  python3 "<plugin>/scripts/session-scan.py" [--hours 12] [--self <session-id>] [--full <session-id>]
+  (installed under ~/.claude/plugins/; the /c-assistant command locates it for you)
 
 Reads only the tail of each .jsonl transcript, so it is cheap even on the 70MB ones.
 Prints one block per session: topic, state, the user's last message, the session's

@@ -183,11 +183,39 @@ def should_triage(payload, env, sysname, registry_dir, state_dir):
             lock_age = LOCK_STALE_S  # lock vanished mid-check; treat as stale
         if lock_age < LOCK_STALE_S:
             return False, "locked"
+        # Steal by RENAME, not rmdir+mkdir: rename is one atomic op, so
+        # exactly one stealer gets the directory, and a peer that also judged
+        # it stale can no longer land its rmdir on a lock somebody just
+        # legitimately acquired (that interleaving made both entrants
+        # proceed). The renamed dir is exclusively ours, so re-checking its
+        # age cannot race: FRESH here means our stat was from before a peer's
+        # completed steal — give the live lock back and back off.
+        grave = lock_path + ".steal-" + str(os.getpid())
         try:
-            os.rmdir(lock_path)
+            os.rename(lock_path, grave)
+        except OSError:
+            return False, "locked"  # another stealer won the rename
+        try:
+            grave_age = time.time() - os.path.getmtime(grave)
+        except OSError:
+            grave_age = LOCK_STALE_S
+        if grave_age < LOCK_STALE_S:
+            try:
+                os.rename(grave, lock_path)
+            except OSError:
+                try:
+                    os.rmdir(grave)
+                except OSError:
+                    pass
+            return False, "locked"
+        try:
+            os.rmdir(grave)
+        except OSError:
+            pass
+        try:
             os.mkdir(lock_path)
         except OSError:
-            return False, "locked"
+            return False, "locked"  # a peer re-locked first; theirs is fresh
 
     return True, "go"
 
