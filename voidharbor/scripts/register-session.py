@@ -2,7 +2,7 @@
 """SessionStart hook: record this session's (id, pid, tty, app) in
 ~/.claude/session-registry/ so SeaShell can resolve a session id to the pane
 that owns it. Ships with the c-assistant plugin; a personal copy may also
-run — the write is idempotent.
+run, since the write is idempotent.
 
 Fires on startup, resume, /clear, and compact -- so a long-lived window
 re-registers itself whenever its session id changes. Writes one small JSON

@@ -81,8 +81,8 @@ session, and it will not answer a question on your behalf — the session asked
 same problem separately, or one that concluded something is impossible while
 another is still building toward it.
 
-`/c-assistant` and its spoken twin `/c-assistant-voice` are the whole surface —
-you run them when you remember to. A SessionStart hook records each session's
+`/c-assistant` and its spoken twin `/c-assistant-voice` are the whole surface,
+run when you remember to. A SessionStart hook records each session's
 pid and pane in a small on-disk registry so SeaShell can resolve a session id
 to the pane that owns it. Both the standalone plugin and the `voidharbor`
 bundle ship that hook, and installing both is fine: the bundle's copy checks
