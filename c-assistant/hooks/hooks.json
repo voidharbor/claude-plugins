@@ -10,17 +10,6 @@
           }
         ]
       }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/needs-input-hook.py\"",
-            "timeout": 15
-          }
-        ]
-      }
     ]
   }
 }

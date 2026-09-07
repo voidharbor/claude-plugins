@@ -11,10 +11,6 @@ BUNDLE = os.path.join(HERE, "..", "..", "voidharbor")
 SYNCED = [
     ("hooks/hooks.json", "hooks/hooks.json"),
     ("scripts/register-session.py", "scripts/register-session.py"),
-    ("scripts/needs-input-hook.py", "scripts/needs-input-hook.py"),
-    ("scripts/push-card.py", "scripts/push-card.py"),
-    ("scripts/triage-and-push.py", "scripts/triage-and-push.py"),
-    ("scripts/triage-prompt.md", "scripts/triage-prompt.md"),
     # Was missing from this list, and had duly drifted: the bundle's copy told
     # the reader to run ~/.claude/bin/session-scan.py, a path that exists on
     # one machine and nobody else's. The list is the only thing keeping the

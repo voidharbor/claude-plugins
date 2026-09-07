@@ -7,7 +7,8 @@ class HooksConfig(unittest.TestCase):
         with open(os.path.join(ROOT, "hooks", "hooks.json")) as f:
             cfg = json.load(f)
         hooks = cfg["hooks"]
-        for event, script in [("SessionStart", "register-session.py"), ("Stop", "needs-input-hook.py")]:
+        self.assertEqual(list(hooks.keys()), ["SessionStart"])
+        for event, script in [("SessionStart", "register-session.py")]:
             entries = hooks[event]
             self.assertEqual(len(entries), 1)
             cmd = entries[0]["hooks"][0]["command"]

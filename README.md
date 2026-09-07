@@ -2,8 +2,7 @@
 
 Thirteen small skills for [Claude Code](https://claude.com/claude-code). Most are a
 single markdown file with no dependencies; `refresh` also ships one Python script,
-`chrome-tabs-all` one, and `c-assistant` five, plus the hooks and prompt its
-background lane needs.
+`chrome-tabs-all` one, and `c-assistant` two.
 Nothing to build either way.
 
 ## Install
@@ -34,7 +33,7 @@ Or pick a la carte — each skill is also its own plugin, independent of the res
 | **chrome-tabs-all** | Clears *every* leftover "✅ Claude" tab group, not just this session's — including ones whose session already ended. Closes by exact tab ID, never by URL, so your own tabs survive even when they share a URL with Claude's. | [Claude in Chrome](https://claude.com/chrome) extension, Python 3, macOS |
 | **mac-control** | Drives native macOS apps via the computer-use MCP — Word/Pages PDF export, Finder, Preview, Messages, System Settings. | computer-use MCP, macOS |
 | **ultracode-lite** | Runs multi-agent `Workflow` orchestration on a lean budget: scout inline, fan out narrow, set model and effort on every agent, pipeline instead of parallel. | `Workflow` tool |
-| **c-assistant** | Two lanes: `/c-assistant` triages every session you have open on demand and reports which are blocked on you, with `/c-assistant-voice` as a spoken variant for when your hands are busy; a Lookout hook lane runs in the background and pushes a live approval card into SeaShell the moment a session stops on a real question. | Python 3; SeaShell 0.2.0+ for the hook lane |
+| **c-assistant** | `/c-assistant` reads every session you have open on demand and reports which are blocked on you, with `/c-assistant-voice` as a spoken variant for when your hands are busy. | Python 3 |
 | **refresh** | Shows the last prompt you actually typed, word for word, read from the transcript on disk — so it survives context being summarized. | Python 3 |
 | **product-forge** | A propose/apply pair that keeps a product you maintain competitive: `/product-forge` reviews it weekly against its rivals and proposes at most four small, numbered items; `/product-forge-apply` builds only what you approve, behind the repo's own gates. | nothing |
 | **perf-pass** | A dedicated performance session — idle CPU, memory, GPU — where the only accepted proof is a measured before/after number, and anything that can't show a number gets reverted. | nothing |
@@ -82,25 +81,18 @@ session, and it will not answer a question on your behalf — the session asked
 same problem separately, or one that concluded something is impossible while
 another is still building toward it.
 
-It ships two lanes. `/c-assistant` and its spoken twin `/c-assistant-voice` are
-the pull lane — you run them when you remember to. Lookout is the push lane: a
-SessionStart hook registers each session, a Stop hook prefilters every turn's
-end for something that actually looks like a real question, and only then does
-a detached worker ask a cheap model to judge it and push a live approval card
-straight into the SeaShell pane that asked. Lookout runs on macOS and Linux
-(not Windows) and needs SeaShell 0.2.0+ to have anywhere to push a card to —
-without it the hook stays silent and the pull lane still works on its own. The
-`voidharbor` bundle ships these hooks too, so either install works:
+`/c-assistant` and its spoken twin `/c-assistant-voice` are the whole surface —
+you run them when you remember to. A SessionStart hook records each session's
+pid and pane in a small on-disk registry so SeaShell can resolve a session id
+to the pane that owns it. Both the standalone plugin and the `voidharbor`
+bundle ship that hook, and installing both is fine: the bundle's copy checks
+whether standalone c-assistant is installed and enabled, and if so returns
+immediately, one registration, never two.
 
-```
-/plugin marketplace add voidharbor/claude-plugins
-/plugin install c-assistant@voidharbor   # just this plugin
-/plugin install voidharbor@voidharbor    # or the whole bundle, hooks included
-```
-
-Installing both is fine: at every hook entry the bundle's copy checks whether
-standalone c-assistant is installed and enabled, and if so returns immediately —
-one triage, one card, never two.
+(Earlier versions also shipped a background hook lane, "Lookout," that watched
+a session for something that looked like a real question and pushed a live
+approval card into its SeaShell pane. It was removed in 1.3.0 along with the
+SeaShell control-socket command it depended on.)
 
 **`chrome-tabs-all`** exists because `chrome-tabs` deliberately refuses to reach
 past its own tab group, and eventually you have a tab strip full of "✅ Claude"
@@ -151,9 +143,8 @@ or dropped, so a bounded sweep never reads as exhaustive coverage.
 
 ## Requirements
 
-Claude Code with plugin support. `mac-control` is macOS-only; `c-assistant`'s
-Lookout hook lane needs macOS/Linux with `python3` on PATH (elsewhere it stays
-inert); the rest are platform-independent.
+Claude Code with plugin support. `mac-control` is macOS-only; the rest are
+platform-independent.
 
 ## License
 

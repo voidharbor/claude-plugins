@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """SessionStart hook: record this session's (id, pid, tty, app) in
-~/.claude/session-registry/ so the Lookout hook lane (needs-input-hook.py,
-push-card.py, triage-and-push.py) can resolve sessions to SeaShell panes.
-Ships with the c-assistant plugin; a personal copy may also run — the
-write is idempotent.
+~/.claude/session-registry/ so SeaShell can resolve a session id to the pane
+that owns it. Ships with the c-assistant plugin; a personal copy may also
+run — the write is idempotent.
 
 Fires on startup, resume, /clear, and compact -- so a long-lived window
 re-registers itself whenever its session id changes. Writes one small JSON
@@ -23,11 +22,10 @@ SCRIPT_PATH = os.path.abspath(__file__)
 
 
 def duplicate_hook_copy(script_path, plugins_file, settings_file):
-    """Same ownership rule as needs-input-hook.py (see its docstring): the
-    voidharbor bundle's copy defers when standalone c-assistant is installed
-    and enabled. Registration is idempotent, so a double fire here only
-    wastes a ps walk and a prune pass -- but one owner keeps the lane
-    simple to reason about across both hooks."""
+    """The voidharbor bundle's copy defers when standalone c-assistant is
+    installed and enabled. Registration is idempotent, so a double fire here
+    only wastes a ps walk and a prune pass -- but one owner keeps the
+    registry simple to reason about across both copies."""
     parts = os.path.normpath(script_path).split(os.sep)
     if "c-assistant" in parts:
         return False
@@ -103,8 +101,6 @@ def find_claude_ancestor():
 def main():
     if duplicate_hook_copy(SCRIPT_PATH, PLUGINS_FILE, SETTINGS_FILE):
         return
-    if os.environ.get("LOOKOUT_TRIAGE"):
-        return  # headless triage must not register a ghost session pointing at the original pane
     try:
         data = json.load(sys.stdin)
     except Exception:
