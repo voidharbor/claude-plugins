@@ -83,8 +83,20 @@
     {
       "name": "refresh",
       "description": "Show the last prompt you actually typed, word for word, read from the session transcript on disk rather than from a summarized context.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "source": "./refresh",
+      "category": "productivity",
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
+      "name": "ultra-prompt",
+      "description": "Rewrite the prompt you just typed into a stronger one before you send it. Gathers the session's real context first - actual paths, project instructions, what this session has been doing - hands it to a more capable model, then prints the rewrite and stops. It never runs the prompt.",
+      "version": "1.0.0",
+      "source": "./ultra-prompt",
       "category": "productivity",
       "author": {
         "name": "voidharbor",
@@ -143,7 +155,7 @@
     {
       "name": "synth-mode",
       "description": "Makes writing stop sounding machine-made, by removing tells rather than adding style to fake a human. Picks one register per reader, kills trope phrases and over-polish, and replaces the best line in every draft with the plain version, because nobody writing a real email lands a good one. Learns your voice from samples you confirm you typed yourself. Named for Fallout 4's synths - the good ones pass.",
-      "version": "1.0.0",
+      "version": "2.1.0",
       "source": "./synth-mode",
       "category": "productivity",
       "author": {
@@ -166,8 +178,8 @@
     },
     {
       "name": "voidharbor",
-      "description": "The whole set in one install - all thirteen skills, namespaced /voidharbor:<name>. Install this bundle, or pick skills a la carte below.",
-      "version": "1.3.0",
+      "description": "The whole set in one install - all fourteen skills, namespaced /voidharbor:<name>. Install this bundle, or pick skills a la carte below.",
+      "version": "1.4.0",
       "source": "./voidharbor",
       "category": "productivity",
       "author": {

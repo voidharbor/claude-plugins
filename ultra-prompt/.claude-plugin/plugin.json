@@ -1,0 +1,9 @@
+{
+  "name": "ultra-prompt",
+  "description": "Rewrite the prompt you just typed into a stronger one, using a more capable model and the session's real context, then hand it back without running it.",
+  "version": "1.0.0",
+  "author": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  }
+}

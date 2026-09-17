@@ -1,8 +1,8 @@
 # claude-plugins
 
-Thirteen small skills for [Claude Code](https://claude.com/claude-code). Most are a
-single markdown file with no dependencies; `refresh` also ships one Python script,
-`chrome-tabs-all` one, and `c-assistant` two.
+Fourteen small skills for [Claude Code](https://claude.com/claude-code). Most are a
+single markdown file with no dependencies; `refresh` and `ultra-prompt` share one
+Python script, `chrome-tabs-all` ships one, and `c-assistant` two.
 Nothing to build either way.
 
 ## Install
@@ -14,7 +14,7 @@ Everything at once:
 /plugin install voidharbor@voidharbor
 ```
 
-That gives you all thirteen, namespaced as `/voidharbor:<name>` (e.g. `/voidharbor:refresh`).
+That gives you all fourteen, namespaced as `/voidharbor:<name>` (e.g. `/voidharbor:refresh`).
 
 Or pick a la carte — each skill is also its own plugin, independent of the rest:
 
@@ -35,13 +35,14 @@ Or pick a la carte — each skill is also its own plugin, independent of the res
 | **ultracode-lite** | Runs multi-agent `Workflow` orchestration on a lean budget: scout inline, fan out narrow, set model and effort on every agent, pipeline instead of parallel. | `Workflow` tool |
 | **c-assistant** | `/c-assistant` reads every session you have open on demand and reports which are blocked on you, with `/c-assistant-voice` as a spoken variant for when your hands are busy. | Python 3 |
 | **refresh** | Shows the last prompt you actually typed, word for word, read from the transcript on disk — so it survives context being summarized. | Python 3 |
+| **ultra-prompt** | Rewrites the prompt you just typed into a stronger one: gathers the session's real context, hands it to a more capable model, prints the result and stops. It never runs the prompt. | Python 3 |
 | **product-forge** | A propose/apply pair that keeps a product you maintain competitive: `/product-forge` reviews it weekly against its rivals and proposes at most four small, numbered items; `/product-forge-apply` builds only what you approve, behind the repo's own gates. | nothing |
 | **perf-pass** | A dedicated performance session — idle CPU, memory, GPU — where the only accepted proof is a measured before/after number, and anything that can't show a number gets reverted. | nothing |
 | **skill-forge** | A propose/apply pair that audits everything you have authored for Claude, finds defects with quotable fixes, and applies only the numbered items you approve — with a publish gate so nothing personal reaches a public repo. | nothing |
 | **memory-curate** | Audits what Claude remembers across sessions — stale facts, duplicates, files that grew into documents, memories trapped in a project you no longer open — and proposes numbered fixes. Additions must quote your own words, so it never memorises a claim that got corrected an hour later. | Python 3 |
 | **synth-mode** | Makes writing stop sounding machine-made. A skill, not a command: it loads before any human-facing writing, picks one register for the actual reader, kills trope phrases and over-polish, and replaces the best line in the draft with the plain version, because nobody writing a real email lands a good one. Learns your voice from samples you confirm you typed yourself. Named for Fallout 4's gen 3 synths. | nothing |
 
-## Notes on nine of them
+## Notes on ten of them
 
 **`product-forge`** and **`perf-pass`** were extracted from the loop that maintains
 [SeaShell](https://github.com/voidharbor/seashell), a terminal pane manager, and
@@ -125,6 +126,21 @@ explicitly forbids reconstructing it from memory. It identifies the session from
 `CLAUDE_CODE_SESSION_ID` rather than by newest-modified file, which matters once you
 have several sessions open. Tool results, subagent chatter, injected system reminders
 and its own invocation are all filtered out.
+
+**`ultra-prompt`** rewrites the prompt you were about to send, and then refuses
+to run it. The refusal is the design. A command that improves your prompt and then acts
+on its own improvement has quietly swapped your request for its interpretation of it,
+and you never see the swap happen; printing the rewrite and stopping keeps that decision
+where it belongs. The second bet is that prompt improvement is a context problem rather
+than a writing problem. Turning "fix the footer" into a well structured request with
+acceptance criteria is easy and nearly worthless. Discovering that there are two footers,
+and that fixing one leaves the other stale, is what makes the prompt executable, so the
+command spends most of its effort reading the project before it writes a word. Anything
+it could not verify goes to the bottom as an open question instead of being asserted as
+spec, because a confidently invented requirement is worse than the vague prompt you
+started with. It shares its transcript reader with `refresh` and registers itself as a
+self command there, so a bare `/ultra-prompt` improves what you actually typed instead of
+improving the word "/ultra-prompt".
 
 **`efmtu`** ("Easy For Me To Understand") shortens the answer, never the work. It still reads the files and runs
 the checks — it just reports briefly. It explicitly refuses to let brevity turn "I

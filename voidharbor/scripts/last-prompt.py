@@ -39,7 +39,9 @@ COMMAND_ARGS = re.compile(r"<command-args>(.*?)</command-args>", re.S)
 # Wrappers the CLI writes into the user stream that the user never typed.
 NOISE_TAGS = ("<local-command-stdout>", "<local-command-stderr>", "<bash-stdout>")
 
-SELF_COMMANDS = {"/refresh"}
+# Meta-commands that ask about the last prompt. Reporting one as the answer
+# would just echo the question back.
+SELF_COMMANDS = {"/refresh", "/ultra-prompt"}
 
 
 def read_records(path, nbytes):
@@ -103,7 +105,7 @@ def as_prompt(rec):
     if name:
         cmd = name.group(1).strip()
         if cmd in SELF_COMMANDS:
-            return None  # never report the /refresh invocation as the answer
+            return None  # never report the meta-command itself as the answer
         args_match = COMMAND_ARGS.search(text)
         args = (args_match.group(1).strip() if args_match else "")
         return f"{cmd} {args}".strip()
