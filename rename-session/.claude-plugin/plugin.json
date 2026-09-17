@@ -1,0 +1,9 @@
+{
+  "name": "rename-session",
+  "description": "Rename the current session from what the conversation was actually about, so it is findable later in the resume picker instead of being titled after your first message.",
+  "version": "1.0.0",
+  "author": {
+    "name": "voidharbor",
+    "url": "https://github.com/voidharbor"
+  }
+}

@@ -105,6 +105,18 @@
       "homepage": "https://github.com/voidharbor/claude-plugins"
     },
     {
+      "name": "rename-session",
+      "description": "Rename the current session from what the conversation was actually about, not from your first message. Writes both places the app writes on a rename, so the title survives in the resume picker.",
+      "version": "1.0.0",
+      "source": "./rename-session",
+      "category": "productivity",
+      "author": {
+        "name": "voidharbor",
+        "url": "https://github.com/voidharbor"
+      },
+      "homepage": "https://github.com/voidharbor/claude-plugins"
+    },
+    {
       "name": "product-forge",
       "description": "A propose/apply loop that keeps a product competitive without letting it sprawl: weekly review against the tools people actually choose, filtered hard for small and genuinely useful, applied only after you approve each numbered item.",
       "version": "1.0.0",
@@ -178,8 +190,8 @@
     },
     {
       "name": "voidharbor",
-      "description": "The whole set in one install - all fourteen skills, namespaced /voidharbor:<name>. Install this bundle, or pick skills a la carte below.",
-      "version": "1.4.0",
+      "description": "The whole set in one install - all fifteen skills, namespaced /voidharbor:<name>. Install this bundle, or pick skills a la carte below.",
+      "version": "1.5.0",
       "source": "./voidharbor",
       "category": "productivity",
       "author": {

@@ -1,7 +1,7 @@
 {
   "name": "voidharbor",
-  "description": "All fourteen voidharbor skills in one install: efmtu, my-skills, chrome-tabs, chrome-tabs-all, mac-control, ultracode-lite, c-assistant, refresh, ultra-prompt, product-forge, perf-pass, skill-forge, memory-curate, synth-mode.",
-  "version": "1.4.0",
+  "description": "All fifteen voidharbor skills in one install: efmtu, my-skills, chrome-tabs, chrome-tabs-all, mac-control, ultracode-lite, c-assistant, refresh, ultra-prompt, rename-session, product-forge, perf-pass, skill-forge, memory-curate, synth-mode.",
+  "version": "1.5.0",
   "author": {
     "name": "voidharbor",
     "url": "https://github.com/voidharbor"
